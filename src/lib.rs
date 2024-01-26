@@ -1,5 +1,7 @@
 pub mod lca;
+pub mod rmq;
 use exposure::TreeSet;
+use exposure::RMQ;
 pub use lca::*;
 pub mod exposure;
 use pyo3::prelude::*;
@@ -8,5 +10,6 @@ use pyo3::prelude::*;
 #[pymodule]
 fn table_five(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<TreeSet>()?;
+    m.add_class::<RMQ>()?;
     Ok(())
 }

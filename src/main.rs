@@ -1,5 +1,6 @@
 mod exposure;
 mod lca;
+mod rmq;
 pub use lca::*;
 use ogcat::ogtree::TreeCollection;
 

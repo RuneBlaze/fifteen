@@ -5,6 +5,39 @@ use ogcat::ogtree::TreeCollection;
 use pyo3::prelude::*;
 
 #[pyclass]
+pub struct RMQ {
+    inner: crate::rmq::RMQ,
+}
+
+#[pymethods]
+impl RMQ {
+    #[new]
+    pub fn new(values: Vec<u32>) -> Self {
+        Self {
+            inner: crate::rmq::RMQ::new(values),
+        }
+    }
+
+    pub fn __len__(&self) -> usize {
+        self.inner.values.len()
+    }
+
+    pub fn argmin(&self, l: u32, r: u32) -> usize {
+        let (l, r) = (std::cmp::min(l, r), std::cmp::max(l, r));
+        self.inner.argmin(l, r)
+    }
+
+    pub fn values(&self) -> Vec<u32> {
+        self.inner.values.clone()
+    }
+
+    pub fn min(&self, l: u32, r: u32) -> u32 {
+        let (l, r) = (std::cmp::min(l, r), std::cmp::max(l, r));
+        self.inner.min(l, r)
+    }
+}
+
+#[pyclass]
 pub struct TreeSet {
     data: TreeCollectionWithLCA,
 }
